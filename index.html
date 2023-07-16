@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scaled=1.0">
+    <title>Quote Forge AI</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <div class="home">
+      <nav>
+        <img src="assets/img/logo1.png" class="logo">
+        <button type="darkmode-button" onclick="toggleBtn()" id="btn">
+          <span></span>
+        </button>
+      </nav>
+      <div class="lamp-container">
+        <img src="assets/img/lamp.png" class="lamp">
+        <img src="assets/img/light.png" class="lamplight" id="lamplight">
+      </div>
+      <div class="quotebox">
+        <h2>Quote of the day</h2>
+        <br>
+        <blockquote id="quote">Loading...</blockquote>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <span id="author">Loading...</span>
+        <button onclick="getquote(api_url)">Generate</button>
+      </div>
+    </div>
+    <script>
+      var btn = document.getElementById("btn");
+      var lamplight = document.getElementById("lamplight");
+      const quote = document.getElementById("quote");
+      const author = document.getElementById("author");
+      const api_url = "https://api.quotable.io/random";
+
+      function toggleBtn() {
+        btn.classList.toggle("active");
+        lamplight.classList.toggle("on");
+      }
+      async function getquote(url) {
+        const response = await fetch(url);
+        var data = await response.json();
+        quote.innerHTML = data.content;
+        author.innerHTML = data.author;
+      }
+      getquote(api_url);
+    </script>
+  </body>
+</html>
